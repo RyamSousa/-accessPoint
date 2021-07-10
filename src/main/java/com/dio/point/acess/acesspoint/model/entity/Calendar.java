@@ -2,19 +2,16 @@ package com.dio.point.acess.acesspoint.model.entity;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Company {
+public class Calendar {
     private Long id;
+    private DateType dateType;
     private String description;
-    private String cnpj;
-    private String address;
-    private String district;
-    private String city;
-    private String state;
-    private String phoneNumber;
-
+    private LocalDateTime especialDate;
 }

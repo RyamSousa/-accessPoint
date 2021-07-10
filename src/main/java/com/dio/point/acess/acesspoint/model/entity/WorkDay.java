@@ -1,20 +1,15 @@
 package com.dio.point.acess.acesspoint.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Id;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class WorkDay {
 
-    @Id
     private Long id;
-
     private String description;
 }
