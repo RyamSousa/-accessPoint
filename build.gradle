@@ -1,0 +1,43 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.2'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.dio'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	developmentOnly('org.springframework.boot:spring-boot-devtools')
+
+	implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.12.4'
+
+	compileOnly('org.projectlombok:lombok:1.18.20')
+	annotationProcessor('org.projectlombok:lombok:1.18.20')
+
+	implementation 'com.h2database:h2'
+	//runtimeOnly()
+
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	implementation 'io.springfox:springfox-bean-validators:2.6.1'
+
+//	implementation 'org.hibernate:hibernate-core:3.6.7.Final'
+//	implementation 'org.hibernate:hibernate-entitymanager:5.4.4.Final'
+
+	implementation 'org.hibernate:hibernate-envers'
+	implementation 'org.hibernate.validator:hibernate-validator:6.1.2.Final'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}
