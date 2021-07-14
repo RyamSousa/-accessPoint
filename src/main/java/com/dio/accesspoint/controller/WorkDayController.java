@@ -1,6 +1,6 @@
 package com.dio.accesspoint.controller;
 
-import com.dio.accesspoint.model.entity.WorkDay;
+import com.dio.accesspoint.model.dto.WorkDayDTO;
 import com.dio.accesspoint.service.WorkDayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,31 +13,31 @@ import java.util.List;
 public class WorkDayController {
 
     @Autowired
-    private WorkDayService workDayService;
+    private WorkDayService serviceWorkDay;
 
     @PostMapping
-    public ResponseEntity<WorkDay> createWorkDay(@RequestBody WorkDay workDay){
-        return ResponseEntity.ok(workDayService.save(workDay));
+    public ResponseEntity<WorkDayDTO> createWorkDay(@RequestBody WorkDayDTO workDay){
+        return ResponseEntity.ok(serviceWorkDay.save(workDay));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<WorkDay> findByIdWorkDay(@PathVariable("id") Long id) throws Exception {
-        return ResponseEntity.ok(workDayService.findById(id));
+    public ResponseEntity<WorkDayDTO> findByIdWorkDay(@PathVariable("id") Long id) throws Exception {
+        return ResponseEntity.ok(serviceWorkDay.findById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<WorkDay>> findAllWorkDays(){
-        return ResponseEntity.ok(workDayService.findAll());
+    public ResponseEntity<List<WorkDayDTO>> findAllWorkDays(){
+        return ResponseEntity.ok(serviceWorkDay.findAll());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<WorkDay> deleteWorkDay(@PathVariable("id") Long id){
-        workDayService.delete(id);
+    public ResponseEntity<WorkDayDTO> deleteWorkDay(@PathVariable("id") Long id){
+        serviceWorkDay.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping
-    public ResponseEntity<WorkDay> updateWorkDay(@RequestBody WorkDay workDay){
-        return ResponseEntity.ok(workDayService.update(workDay));
+    public ResponseEntity<WorkDayDTO> updateWorkDay(@RequestBody WorkDayDTO workDay){
+        return ResponseEntity.ok(serviceWorkDay.update(workDay));
     }
 }

@@ -1,41 +1,65 @@
 package com.dio.accesspoint.service;
 
+import com.dio.accesspoint.mapper.WorkDayMapper;
+import com.dio.accesspoint.model.dto.WorkDayDTO;
 import com.dio.accesspoint.model.entity.WorkDay;
 import com.dio.accesspoint.repository.WorkDayRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class WorkDayService {
 
-    @Autowired
-    private WorkDayRepository workDayRepository;
+
+    private WorkDayRepository repositoryWorkDay;
+
+    private WorkDayMapper workDayMapper;
 
     @Transactional
-    public WorkDay save(WorkDay workDay) {
-        return workDayRepository.save(workDay);
+    public WorkDayDTO save(WorkDayDTO dto) {
+        WorkDay workDayEntity = workDayMapper.toWorkDay(dto);
+        workDayEntity = repositoryWorkDay.save(workDayEntity);
+        WorkDayDTO workDayDTO = workDayMapper.toWorkDayDTO(workDayEntity);
+
+        return workDayDTO;
     }
 
     @Transactional
-    public WorkDay findById(Long id) throws Exception {
-        return workDayRepository.findById(id).orElseThrow(() -> new Exception("Work day not found"));
+    public WorkDayDTO findById(Long id){
+        Optional<WorkDay> workDayEntity = repositoryWorkDay.findById(id);
+        WorkDayDTO workDayDTO = workDayMapper.toWorkDayDTO(workDayEntity.get());
+
+        return workDayDTO;
     }
 
     @Transactional
     public void delete(Long id){
-        workDayRepository.deleteById(id);
+        repositoryWorkDay.deleteById(id);
     }
 
     @Transactional
-    public List<WorkDay> findAll(){
-        return workDayRepository.findAll();
+    public List<WorkDayDTO> findAll(){
+        List<WorkDay> allWorkDays = repositoryWorkDay.findAll();
+
+        return allWorkDays
+                .stream()
+                .map(workDayMapper::toWorkDayDTO)
+                .collect(Collectors.toList());
     }
 
     @Transactional
-    public WorkDay update(WorkDay workDay) {
-        return workDayRepository.save(workDay);
+    public WorkDayDTO update(WorkDayDTO dto) {
+        WorkDay workDayEntity = workDayMapper.toWorkDay(dto);
+        workDayEntity = repositoryWorkDay.save(workDayEntity);
+        WorkDayDTO workDayDTO = workDayMapper.toWorkDayDTO(workDayEntity);
+
+        return workDayDTO;
     }
 }
