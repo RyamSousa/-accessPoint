@@ -4,6 +4,8 @@ features and technologies to better complete the project.</p>
 
 > https://web.digitalinnovation.one/track/santander-fullstack-developerem 
 
+> Satatus :heavy_check_mark:
+
 ### TECHNOLOGIES USED
  - Java
  - Spring Boot
